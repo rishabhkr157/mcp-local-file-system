@@ -1,0 +1,30 @@
+version: "3.9"
+
+# ── MCP Filesystem Server ──────────────────────────────────────────────────────
+#
+# Usage:
+#   docker compose up --build
+#
+# ──────────────────────────────────────────────────────────────────────────────
+
+services:
+  mcp-filesystem:
+    build: .
+    image: mcp-filesystem:latest
+    container_name: mcp-filesystem
+
+    stdin_open: true   # keep STDIN open (MCP uses stdio)
+    tty: false         # MCP needs raw stdio, not a TTY
+
+    environment:
+      MCP_ROOT_DIR: /workspace
+      MCP_ROOTS: /workspace,/workspace/E_drive
+      PYTHONUNBUFFERED: "1"
+
+    volumes:
+      # Mount host drives to container paths
+      - D:/:/workspace
+      - E:/:/workspace/E_drive
+      - ./server.py:/app/server.py
+
+    restart: "no"   # MCP clients restart the process themselves

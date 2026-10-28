@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "docker",
+      "args": [
+        "run",
+        "--rm",
+        "-i",
+        "--name",
+        "mcp-filesystem",
+        "-e",
+        "MCP_ROOT_DIR=/workspace",
+        "--volume",
+        "<YOUR_LOCAL_FOLDER_PATH>:/workspace",
+        "--volume",
+        "<PATH_TO_CLONED_REPO>/server.py:/app/server.py",
+        "mcp-filesystem:latest"
+      ]
+    }
+  }
+}
